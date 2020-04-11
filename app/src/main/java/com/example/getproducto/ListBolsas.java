@@ -72,6 +72,11 @@ public class ListBolsas extends AppCompatActivity implements ListaBolsaAdapter.O
         });
     }
 
+    public void NextView(View view){
+        Intent intent = new Intent(getApplicationContext(),TendenciaActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public void oneNoteClick(int position) {
         Intent intent = new Intent(getApplicationContext(),ProductByBolsa.class);

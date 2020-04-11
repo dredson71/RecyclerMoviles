@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MonthFragment">
+
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeButtons">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Week"
+            android:layout_toStartOf="@+id/btnMonth"
+            android:id="@+id/btnWeek"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Month"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/btnMonth"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Year"
+            android:layout_toEndOf="@+id/btnMonth"
+            android:id="@+id/btnYear"/>
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="400dp"
+        android:layout_height="350dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/relativeChart"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/relativeButtons">
+        <lecho.lib.hellocharts.view.LineChartView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chart"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:id="@+id/relativeReciclados"
+        android:layout_below="@+id/relativeChart">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativePlastico">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:id="@+id/txtPlastico"
+                android:text="Plastico"/>
+
+            <TextView
+                android:id="@+id/txtPlasticoCantidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtPlastico"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="-25dp"
+                android:text="0" />
+            <TextView
+                android:id="@+id/txtPlasticoPeso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtPlasticoCantidad"
+                android:layout_centerInParent="true"
+                android:text="0gr" />
+            <TextView
+                android:id="@+id/txtPlasticoPuntos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtPlasticoPeso"
+                android:layout_centerInParent="true"
+                android:text="0" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativePapelCarton"
+            android:layout_toEndOf="@+id/relativePlastico"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:id="@+id/txtPapelCarton"
+                android:text="Papel/Carton"/>
+
+            <TextView
+                android:id="@+id/txtPapelCartonCantidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtPapelCarton"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="-25dp"
+                android:text="0" />
+            <TextView
+                android:id="@+id/txtPapelCartonPeso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtPapelCartonCantidad"
+                android:layout_centerInParent="true"
+                android:text="0gr" />
+            <TextView
+                android:id="@+id/txtPapelCartonPuntos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtPapelCartonPeso"
+                android:layout_centerInParent="true"
+                android:text="0" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeVidrio"
+            android:layout_toEndOf="@+id/relativePapelCarton"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:id="@+id/txtVidrio"
+                android:text="Vidrio"/>
+
+            <TextView
+                android:id="@+id/txtVidrioCantidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtVidrio"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="-25dp"
+                android:text="0" />
+            <TextView
+                android:id="@+id/txtVidrioPeso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtVidrioCantidad"
+                android:layout_centerInParent="true"
+                android:text="0gr" />
+            <TextView
+                android:id="@+id/txtVidrioPuntos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtVidrioPeso"
+                android:layout_centerInParent="true"
+                android:text="0" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeMetales"
+            android:layout_toEndOf="@+id/relativeVidrio"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:id="@+id/txtMetales"
+                android:text="Metales"/>
+
+            <TextView
+                android:id="@+id/txtMetalesCantidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtMetales"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="-25dp"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/txtMetalesPeso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtMetalesCantidad"
+                android:layout_centerInParent="true"
+                android:text="0gr" />
+            <TextView
+                android:id="@+id/txtMetalesPuntos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtMetalesPeso"
+                android:layout_centerInParent="true"
+                android:text="0" />
+        </RelativeLayout>
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeReciclados"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:id="@+id/txtTest"
+        android:text="Test"
+        android:textSize="40dp"
+        />
+</RelativeLayout>

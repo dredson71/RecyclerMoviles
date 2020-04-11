@@ -15,4 +15,7 @@ public interface JsonPlaceHolderApi {
 
     @GET
     Call<List<Probolsa>> getProductoByIdBolsa(@Url String url);
+
+    @GET
+    Call<List<Probolsa>> getBolsasByDate(@Url String url);
 }
