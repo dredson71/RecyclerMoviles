@@ -35,7 +35,7 @@ public class ListaProductoByBolsaAdapter extends RecyclerView.Adapter<ListaProdu
     public void onBindViewHolder(ViewHolder holder,int position){
 
         Probolsa c = dataset.get(position);
-        holder.txt_Producto.setText(Integer.toString(c.getCodigo()));
+        holder.txt_Producto.setText(c.getProducto().getNombre());
         holder.txt_Contenido.setText(Double.toString(c.getProducto().getContenido()));
         holder.txt_Abreviatura.setText(c.getProducto().getTipo_Contenido().getAbreviatura());
 

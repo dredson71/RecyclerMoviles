@@ -6,8 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".TendenciaActivity">
 
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/relativeTendenciaList">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnRegistro"
+        android:text="Registro"
+        android:onClick="NextView"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnTendencia"
+        android:text="Tendencia"
+        android:layout_toEndOf="@+id/btnRegistro"/>
+    </RelativeLayout>
+</RelativeLayout>
+
+
 <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_below="@+id/relativeTendenciaList"
+    android:layout_marginTop="10dp"
     android:id="@+id/frameDate"></FrameLayout>
 </RelativeLayout>

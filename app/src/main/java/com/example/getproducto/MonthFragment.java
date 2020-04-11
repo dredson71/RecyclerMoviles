@@ -14,14 +14,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import lecho.lib.hellocharts.model.Axis;
-import lecho.lib.hellocharts.model.AxisValue;
-import lecho.lib.hellocharts.model.Line;
-import lecho.lib.hellocharts.model.LineChartData;
-import lecho.lib.hellocharts.model.PointValue;
-import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
 
@@ -56,7 +48,6 @@ public class MonthFragment extends Fragment {
         txtPapelCartonCount =getView().findViewById(R.id.txtPapelCartonCantidad) ;
         txtPapelCartonPuntos =getView().findViewById(R.id.txtPapelCartonPuntos) ;
         txtPapelCartonPeso =getView().findViewById(R.id.txtPapelCartonPeso) ;
-        txtTest = getView().findViewById(R.id.txtTest);
         textList.add(txtPlasticoCount);
         textList.add(txtVidrioCount);
         textList.add(txtPapelCartonCount);
@@ -69,44 +60,8 @@ public class MonthFragment extends Fragment {
         textList.add(txtVidrioPuntos);
         textList.add(txtPapelCartonPuntos);
         textList.add(txtMetalesPuntos);
-        textList.add(txtTest);
-
-        yAxisData = retrofit.obtenerBolsasByTime("bolsasMonth/","1",textList);
         lineChartView = getView().findViewById(R.id.chart);
-        List yAxisValues = new ArrayList();
-        List axisValues = new ArrayList();
-
-        Line line = new Line(yAxisValues).setColor(Color.parseColor("#9C27B0"));
-        for (int i = 0; i < axisData.length; i++) {
-            axisValues.add(i, new AxisValue(i).setLabel(axisData[i]));
-        }
-
-        for (int i = 0; i < yAxisData.length; i++) {
-            yAxisValues.add(new PointValue(i, yAxisData[i]));
-        }
-        List lines = new ArrayList();
-        lines.add(line);
-
-        LineChartData data = new LineChartData();
-        data.setLines(lines);
-
-        Axis axis = new Axis();
-        axis.setValues(axisValues);
-        axis.setTextSize(16);
-        axis.setTextColor(Color.parseColor("#03A9F4"));
-        data.setAxisXBottom(axis);
-
-        Axis yAxis = new Axis();
-        yAxis.setName("Cantidad");
-        yAxis.setTextColor(Color.parseColor("#03A9F4"));
-        yAxis.setTextSize(16);
-        data.setAxisYLeft(yAxis);
-
-        lineChartView.setLineChartData(data);
-        Viewport viewport = new Viewport(lineChartView.getMaximumViewport());
-        viewport.top = 10;
-        lineChartView.setMaximumViewport(viewport);
-        lineChartView.setCurrentViewport(viewport);
+       retrofit.obtenerBolsasByMonthorWeek("bolsasMonth/","1",textList,lineChartView);
 
         getView().findViewById(R.id.btnWeek).setOnClickListener(new View.OnClickListener() {
             @Override

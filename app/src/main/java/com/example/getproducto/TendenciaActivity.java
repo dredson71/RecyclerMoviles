@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,5 +24,10 @@ public class TendenciaActivity extends AppCompatActivity {
         transaction.commit();
 
 
+    }
+
+    public void NextView(View view){
+        Intent intent = new Intent(getApplicationContext(),ListBolsas.class);
+        startActivity(intent);
     }
 }

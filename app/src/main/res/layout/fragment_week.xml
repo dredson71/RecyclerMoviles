@@ -41,6 +41,7 @@
         <lecho.lib.hellocharts.view.LineChartView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:alpha="0"
             android:id="@+id/chart"/>
     </RelativeLayout>
     <RelativeLayout
@@ -196,15 +197,5 @@
                 android:text="0" />
         </RelativeLayout>
     </RelativeLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/relativeReciclados"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:id="@+id/txtTest"
-        android:text="Test"
-        android:textSize="40dp"
-        />
 
 </RelativeLayout>

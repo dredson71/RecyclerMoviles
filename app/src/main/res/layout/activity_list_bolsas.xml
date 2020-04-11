@@ -6,29 +6,125 @@
     android:layout_height="match_parent"
     tools:context=".ListBolsas">
 
-    <Button
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:onClick="NextView"
-        android:text="Tendencia" />
+        android:id="@+id/relativeTendenciaList">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnRegistro"
+                android:text="Registro"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnTendencia"
+                android:text="Tendencia"
+                android:onClick="NextView"
+                android:layout_toEndOf="@+id/btnRegistro"/>
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeTendenciaList"
+        android:id="@+id/relativeBolsas"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hoy"
+            android:id="@+id/txtHoy"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtHoy"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/txtinsertDatos"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 "
+                android:id="@+id/txtCantBolsasHoy"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/txtCantBolsasHoy"
+                android:text="0"
+                android:id="@+id/txtPtosBolsasHoy"
+                android:layout_marginLeft="20dp"
+                android:textSize="20dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/txtPtosBolsasHoy"
+                android:text="0"
+                android:textSize="20dp"
+                android:id="@+id/txtPesoBolsasHoy"
+                android:layout_marginLeft="20dp"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtinsertDatos"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/txtDatosHoy">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="bolsas "
+                android:id="@+id/txtdatosHoyBolsas"
+                android:textSize="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/txtdatosHoyBolsas"
+                android:text="ptos"
+                android:id="@+id/txtptoshoys"
+                android:layout_marginLeft="20dp"
+                android:textSize="10dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/txtptoshoys"
+                android:layout_marginLeft="20dp"
+                android:text="peso"
+                android:textSize="10dp"
+                />
+
+
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDatosHoy"
+            android:text="Mis Bolsas:"
+            android:textSize="20dp"
+            />
+        </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/relativeBolsas"
         android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="597dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="54dp"
-        android:paddingTop="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+ />
 
 
 
