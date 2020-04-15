@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="wrap_content"
+    android:orientation="vertical" android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:layout_marginLeft="30dp"
     android:layout_centerVertical="true"
+    android:id="@+id/item_LastBolsa"
     android:background="@color/cardview_dark_background">
 
     <TextView
+        android:layout_width="300dp"
+        android:layout_height="20dp"
+        android:id="@+id/topWhite"
+        android:background="@color/cardview_light_background"
+        />
+
+    <TextView
+         android:layout_below="@+id/topWhite"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:id="@+id/txtBolsa"
@@ -38,5 +47,11 @@
         android:layout_below="@+id/txtCreadoFecha"
         android:textColor="@color/cardview_light_background" />
 
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/txtRecoojoFecha"
+        android:background="@color/cardview_light_background"
+        />
 
 </RelativeLayout>

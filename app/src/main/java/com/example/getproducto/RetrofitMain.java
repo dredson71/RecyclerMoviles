@@ -111,8 +111,8 @@ public class RetrofitMain {
         });
     }
 
-    public ArrayList<Bolsa> obtenerDatosBolsas(String usuarioID, ListaBolsaAdapter listBolsasAdapter,ListaBolsaAdapter.OnNoteListener bolsaNoteListener){
-        JsonPlaceHolderApi jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
+    public void obtenerDatosBolsas(String usuarioID, ListaBolsaAdapter listBolsasAdapter,ListaBolsaAdapter.OnNoteListener bolsaNoteListener){
+       /* JsonPlaceHolderApi jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
         Call<List<Bolsa>> call=jsonPlaceHolderApi.getBolsasByUsuario("bolsa/usuario/"+usuarioID);
         call.enqueue(new Callback<List<Bolsa>>() {
             @Override
@@ -133,7 +133,7 @@ public class RetrofitMain {
                 Log.e(TAG,"onFailure:" + t.getMessage());
             }
         });
-        return dataset;
+        return dataset;*/
     }
 
 
@@ -161,37 +161,37 @@ public class RetrofitMain {
                     for(int i=0;i< bolsasbydate.size();i++){
                         if (bolsasbydate.get(i).getBolsa().getRecojoFecha() != null) {
 
-                                Date dia = bolsasbydate.get(i).getBolsa().getRecojoFecha();
-                                Calendar cal = Calendar.getInstance();
-                                cal.setTime(dia);
-                                if (cal.get(Calendar.MONTH) == 1)
-                                    yAxisDataYear[0] += 1;
-                                else if (cal.get(Calendar.MONTH) == 2)
-                                    yAxisDataYear[1] += 1;
-                                else if (cal.get(Calendar.MONTH) == 3)
-                                    yAxisDataYear[2] += 1;
-                                    else if (cal.get(Calendar.MONTH) == 4)
-                                    yAxisDataYear[3] += 1;
-                                else if (cal.get(Calendar.MONTH) == 5)
-                                    yAxisDataYear[4] += 1;
-                                else if (cal.get(Calendar.MONTH) == 6)
-                                    yAxisDataYear[5] += 1;
-                                else if (cal.get(Calendar.MONTH) == 7)
-                                    yAxisDataYear[6] += 1;
-                                else if (cal.get(Calendar.MONTH) == 8)
-                                    yAxisDataYear[7] += 1;
-                                else if (cal.get(Calendar.MONTH) == 9)
-                                    yAxisDataYear[8] += 1;
-                                else if (cal.get(Calendar.MONTH) == 10)
-                                    yAxisDataYear[9] += 1;
-                                else if (cal.get(Calendar.MONTH) == 11)
-                                    yAxisDataYear[10] += 1;
-                                else if (cal.get(Calendar.MONTH) == 12)
-                                    yAxisDataYear[11] += 1;
+                            Date dia = bolsasbydate.get(i).getBolsa().getRecojoFecha();
+                            Calendar cal = Calendar.getInstance();
+                            cal.setTime(dia);
+                            if (cal.get(Calendar.MONTH) == 1)
+                                yAxisDataYear[0] += 1;
+                            else if (cal.get(Calendar.MONTH) == 2)
+                                yAxisDataYear[1] += 1;
+                            else if (cal.get(Calendar.MONTH) == 3)
+                                yAxisDataYear[2] += 1;
+                            else if (cal.get(Calendar.MONTH) == 4)
+                                yAxisDataYear[3] += 1;
+                            else if (cal.get(Calendar.MONTH) == 5)
+                                yAxisDataYear[4] += 1;
+                            else if (cal.get(Calendar.MONTH) == 6)
+                                yAxisDataYear[5] += 1;
+                            else if (cal.get(Calendar.MONTH) == 7)
+                                yAxisDataYear[6] += 1;
+                            else if (cal.get(Calendar.MONTH) == 8)
+                                yAxisDataYear[7] += 1;
+                            else if (cal.get(Calendar.MONTH) == 9)
+                                yAxisDataYear[8] += 1;
+                            else if (cal.get(Calendar.MONTH) == 10)
+                                yAxisDataYear[9] += 1;
+                            else if (cal.get(Calendar.MONTH) == 11)
+                                yAxisDataYear[10] += 1;
+                            else if (cal.get(Calendar.MONTH) == 12)
+                                yAxisDataYear[11] += 1;
 
                             addingValuestoText(bolsasbydate,i,textViewsList);
                         }
-                        }
+                    }
                     List yAxisValues = new ArrayList();
                     List axisValues = new ArrayList();
 
