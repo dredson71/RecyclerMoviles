@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TendenciaActivity">
+    tools:context=".TestingActivity">
+
 
     <RelativeLayout
         android:layout_width="350dp"
@@ -13,21 +14,20 @@
         android:id="@+id/relativetabLayout"
         android:layout_marginTop="30dp"
         >
-    <com.google.android.material.tabs.TabLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabMode="fixed"
-        android:layout_centerHorizontal="true"
-        app:tabGravity="fill"
-        app:tabIndicatorColor="@color/colorAccent"
-        android:id="@+id/tabLayoutTendencia2"
-        ></com.google.android.material.tabs.TabLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMode="fixed"
+            android:layout_centerHorizontal="true"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/colorAccent"
+            android:id="@+id/tabLayoutTendencia2" />
     </RelativeLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_below="@+id/relativetabLayout"
         android:layout_height="match_parent"
-        android:id="@+id/viewPagerTendencia2"
-        ></androidx.viewpager.widget.ViewPager>
+        android:id="@+id/viewPagerTendencia2" />
 </RelativeLayout>

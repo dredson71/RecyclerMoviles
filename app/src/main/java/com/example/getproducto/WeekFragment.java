@@ -34,8 +34,6 @@ public class WeekFragment extends Fragment {
     TextView txtMetalesCount,txtMetalesPuntos,txtMetalesPeso;
     TextView txtPapelCartonCount,txtPapelCartonPuntos,txtPapelCartonPeso,txtTest;
     LineChartView lineChartView;
-    String[] axisData = {"Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"};
-    int [] yAxisData = {0,0,0,0,0,0,0};
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -74,11 +72,10 @@ public class WeekFragment extends Fragment {
         textList.add(txtMetalesPuntos);
 
 
+        retrofit.obtenerBolsasByMonthorWeek("bolsasWeek/","4",textList,lineChartView);
 
-        retrofit.obtenerBolsasByMonthorWeek("bolsasWeek/","1",textList,lineChartView);
 
-
-        getView().findViewById(R.id.btnMonth).setOnClickListener(new View.OnClickListener() {
+       /* getView().findViewById(R.id.btnMonth).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getActivity().getSupportFragmentManager();
@@ -103,6 +100,6 @@ public class WeekFragment extends Fragment {
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit();
             }
-        });
+        });*/
     }
 }

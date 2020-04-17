@@ -25,8 +25,6 @@ public class MonthFragment extends Fragment {
     TextView txtMetalesCount,txtMetalesPuntos,txtMetalesPeso;
     TextView txtPapelCartonCount,txtPapelCartonPuntos,txtPapelCartonPeso,txtTest;
     LineChartView lineChartView;
-    String[] axisData = {"Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"};
-    int [] yAxisData = {0,0,0,0,0,0,0};
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,32 +59,7 @@ public class MonthFragment extends Fragment {
         textList.add(txtPapelCartonPuntos);
         textList.add(txtMetalesPuntos);
         lineChartView = getView().findViewById(R.id.chart);
-       retrofit.obtenerBolsasByMonthorWeek("bolsasMonth/","1",textList,lineChartView);
+       retrofit.obtenerBolsasByMonthorWeek("bolsasMonth/","4",textList,lineChartView);
 
-        getView().findViewById(R.id.btnWeek).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                WeekFragment weekFragment = new WeekFragment();
-                manager.beginTransaction()
-                        .setCustomAnimations(R.anim.enter_left_right,R.anim.exit_left_right,
-                                R.anim.enter_right_left,R.anim.exit_left_right).replace(R.id.frameDate,weekFragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit();
-            }
-        });
-
-        getView().findViewById(R.id.btnYear).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                YearFragment yearFragment = new YearFragment();
-                manager.beginTransaction()
-                        .setCustomAnimations(R.anim.enter_right_left,R.anim.exit_right_left,
-                                R.anim.enter_left_right,R.anim.exit_left_right).replace(R.id.frameDate,yearFragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit();
-            }
-        });
     }
 }

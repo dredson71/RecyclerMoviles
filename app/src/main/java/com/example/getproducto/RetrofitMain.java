@@ -66,15 +66,17 @@ public class RetrofitMain {
                 if(response.isSuccessful()) {
 
                     Producto productos = response.body();
-                    String nombre=productos.getNombre();
-                    String barcode=productos.getBarcode();
-                    Double peso=productos.getPeso();
-                    Double contenido=productos.getContenido();
-                    String categoria_nombre = productos.getCategoria().getNombre();
-                    String abreviatura = productos.getTipo_Contenido().getAbreviatura();
-                    txtNombre.setText(nombre);
-                    txtPeso.setText(peso.toString());
-                    txtAbreviatura.setText(abreviatura);
+                    if(productos!=null) {
+                        String nombre = productos.getNombre();
+                        String barcode = productos.getBarcode();
+                        Double peso = productos.getPeso();
+                        Double contenido = productos.getContenido();
+                        String categoria_nombre = productos.getCategoria().getNombre();
+                        String abreviatura = productos.getTipo_Contenido().getAbreviatura();
+                        txtNombre.setText(nombre);
+                        txtPeso.setText(peso.toString());
+                        txtAbreviatura.setText(abreviatura);
+                    }
 
                 }else{
                     Log.e(TAG,"onResponse:" + response.errorBody());
@@ -211,19 +213,18 @@ public class RetrofitMain {
 
                     Axis axis = new Axis();
                     axis.setValues(axisValues);
-                    axis.setTextSize(16);
+                    axis.setTextSize(13);
                     axis.setTextColor(Color.parseColor("#03A9F4"));
                     data.setAxisXBottom(axis);
 
                     Axis yAxis = new Axis();
-                    yAxis.setName("Cantidad");
                     yAxis.setTextColor(Color.parseColor("#03A9F4"));
-                    yAxis.setTextSize(16);
+                    yAxis.setTextSize(13);
                     data.setAxisYLeft(yAxis);
 
                     lineChartView.setLineChartData(data);
                     Viewport viewport = new Viewport(lineChartView.getMaximumViewport());
-                    viewport.top = 10;
+                    viewport.top = 100;
                     lineChartView.animate().alpha(1f).setDuration(250);
                     lineChartView.setMaximumViewport(viewport);
                     lineChartView.setCurrentViewport(viewport);
@@ -289,14 +290,13 @@ public class RetrofitMain {
                                 else
                                     yAxisDataMonth[6] += 1;
 
+                                addingValuestoText(bolsasbydate,i,textViewsList);
                             }
-                            addingValuestoText(bolsasbydate,i,textViewsList);
 
                         }
                     }
                     List yAxisValues = new ArrayList();
                     List axisValues = new ArrayList();
-
                     Line line = new Line(yAxisValues).setColor(Color.parseColor("#9C27B0"));
                     for (int i = 0; i < axisDataMonth.length; i++) {
                         axisValues.add(i, new AxisValue(i).setLabel(axisDataMonth[i]));
@@ -313,19 +313,18 @@ public class RetrofitMain {
 
                     Axis axis = new Axis();
                     axis.setValues(axisValues);
-                    axis.setTextSize(16);
+                    axis.setTextSize(13);
                     axis.setTextColor(Color.parseColor("#03A9F4"));
                     data.setAxisXBottom(axis);
 
                     Axis yAxis = new Axis();
-                    yAxis.setName("Cantidad");
                     yAxis.setTextColor(Color.parseColor("#03A9F4"));
-                    yAxis.setTextSize(16);
+                    yAxis.setTextSize(13);
                     data.setAxisYLeft(yAxis);
 
                     lineChartView.setLineChartData(data);
                     Viewport viewport = new Viewport(lineChartView.getMaximumViewport());
-                    viewport.top = 10;
+                    viewport.top = 100;
                     lineChartView.animate().alpha(1f).setDuration(250);
                     lineChartView.setMaximumViewport(viewport);
                     lineChartView.setCurrentViewport(viewport);
@@ -353,29 +352,29 @@ public class RetrofitMain {
             puntosPlastico += bolsasbydate.get(i).getPuntuacion();
             plasticoCount++;
             textViewsList.get(0).setText(Integer.toString(plasticoCount));
-            textViewsList.get(4).setText(Integer.toString(pesoPlastico));
-            textViewsList.get(8).setText(Integer.toString(puntosPlastico));
+            textViewsList.get(4).setText(Integer.toString(pesoPlastico) + "  g");
+            textViewsList.get(8).setText(Integer.toString(puntosPlastico)+ "  ptos");
         } else if (bolsasbydate.get(i).getProducto().getCategoria().getNombre().equals("Vidrio")) {
             pesoVidrio += bolsasbydate.get(i).getProducto().getPeso();
             puntosVidrio += bolsasbydate.get(i).getPuntuacion();
             plasticoCount++;
             textViewsList.get(1).setText(Integer.toString(plasticoCount));
-            textViewsList.get(5).setText(Integer.toString(pesoVidrio));
-            textViewsList.get(9).setText(Integer.toString(puntosVidrio));
+            textViewsList.get(5).setText(Integer.toString(pesoVidrio)+ "  g");
+            textViewsList.get(9).setText(Integer.toString(puntosVidrio)+ "  ptos");
         } else if (bolsasbydate.get(i).getProducto().getCategoria().getNombre().equals("Papel/Carton")) {
             pesoPapelCarton += bolsasbydate.get(i).getProducto().getPeso();
             puntosPapelCarton += bolsasbydate.get(i).getPuntuacion();
             plasticoCount++;
             textViewsList.get(2).setText(Integer.toString(plasticoCount));
-            textViewsList.get(6).setText(Integer.toString(pesoPapelCarton));
-            textViewsList.get(10).setText(Integer.toString(puntosPapelCarton));
+            textViewsList.get(6).setText(Integer.toString(pesoPapelCarton)+ "  g");
+            textViewsList.get(10).setText(Integer.toString(puntosPapelCarton)+ "  ptos");
         } else if (bolsasbydate.get(i).getProducto().getCategoria().getNombre().equals("Metal")) {
             pesoMetal += bolsasbydate.get(i).getProducto().getPeso();
             puntosMetal += bolsasbydate.get(i).getPuntuacion();
             plasticoCount++;
             textViewsList.get(3).setText(Integer.toString(plasticoCount));
-            textViewsList.get(7).setText(Integer.toString(pesoMetal));
-            textViewsList.get(11).setText(Integer.toString(puntosMetal));
+            textViewsList.get(7).setText(Integer.toString(pesoMetal)+ "  g");
+            textViewsList.get(11).setText(Integer.toString(puntosMetal)+ "  ptos");
         }
     }
 

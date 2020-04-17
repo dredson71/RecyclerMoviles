@@ -15,11 +15,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import lecho.lib.hellocharts.view.LineChartView;
 
 
 public class YearFragment extends Fragment {
+    View view;
     private RetrofitMain retrofit;
     private ArrayList<TextView> textList = new ArrayList<>();
     TextView txtPlasticoCount,txtPlasticoPuntos,txtPlasticoPeso;
@@ -33,26 +35,27 @@ public class YearFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_year,container,false);
+        view = inflater.inflate(R.layout.fragment_year,container,false);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         retrofit = new RetrofitMain();
-        txtPlasticoCount =getView().findViewById(R.id.txtPlasticoCantidad) ;
-        txtPlasticoPuntos =getView().findViewById(R.id.txtPlasticoPuntos) ;
-        txtPlasticoPeso =getView().findViewById(R.id.txtPlasticoPeso) ;
-        txtVidrioCount =getView().findViewById(R.id.txtVidrioCantidad) ;
-        txtVidrioPuntos =getView().findViewById(R.id.txtVidrioPuntos) ;
-        txtVidrioPeso =getView().findViewById(R.id.txtVidrioPeso) ;
-        txtMetalesCount =getView().findViewById(R.id.txtMetalesCantidad) ;
-        txtMetalesPuntos =getView().findViewById(R.id.txtMetalesPuntos) ;
-        txtMetalesPeso =getView().findViewById(R.id.txtMetalesPeso);
-        txtPapelCartonCount =getView().findViewById(R.id.txtPapelCartonCantidad) ;
-        txtPapelCartonPuntos =getView().findViewById(R.id.txtPapelCartonPuntos) ;
-        txtPapelCartonPeso =getView().findViewById(R.id.txtPapelCartonPeso) ;
-        lineChartView = getView().findViewById(R.id.chart);
+        txtPlasticoCount =view.findViewById(R.id.txtPlasticoCantidad) ;
+        txtPlasticoPuntos =view.findViewById(R.id.txtPlasticoPuntos) ;
+        txtPlasticoPeso =view.findViewById(R.id.txtPlasticoPeso) ;
+        txtVidrioCount =view.findViewById(R.id.txtVidrioCantidad) ;
+        txtVidrioPuntos =view.findViewById(R.id.txtVidrioPuntos) ;
+        txtVidrioPeso =view.findViewById(R.id.txtVidrioPeso) ;
+        txtMetalesCount =view.findViewById(R.id.txtMetalesCantidad) ;
+        txtMetalesPuntos =view.findViewById(R.id.txtMetalesPuntos) ;
+        txtMetalesPeso =view.findViewById(R.id.txtMetalesPeso);
+        txtPapelCartonCount =view.findViewById(R.id.txtPapelCartonCantidad) ;
+        txtPapelCartonPuntos =view.findViewById(R.id.txtPapelCartonPuntos) ;
+        txtPapelCartonPeso =view.findViewById(R.id.txtPapelCartonPeso) ;
+        lineChartView = view.findViewById(R.id.chart);
         textList.add(txtPlasticoCount);
         textList.add(txtVidrioCount);
         textList.add(txtPapelCartonCount);
@@ -65,33 +68,9 @@ public class YearFragment extends Fragment {
         textList.add(txtVidrioPuntos);
         textList.add(txtPapelCartonPuntos);
         textList.add(txtMetalesPuntos);
-
-         retrofit.obtenerBolsasByYear("bolsasYear/","1",textList,lineChartView);
-
-        getView().findViewById(R.id.btnWeek).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                WeekFragment weekFragment = new WeekFragment();
-                manager.beginTransaction()
-                        .setCustomAnimations(R.anim.enter_left_right,R.anim.exit_left_right,
-                                R.anim.enter_right_left,R.anim.exit_right_left).replace(R.id.frameDate,weekFragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit();
-            }
-        });
-
-        getView().findViewById(R.id.btnMonth).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                MonthFragment fragmentMonth = new MonthFragment();
-                manager.beginTransaction()
-                        .setCustomAnimations(R.anim.enter_left_right,R.anim.exit_left_right,
-                                R.anim.enter_right_left,R.anim.exit_right_left).replace(R.id.frameDate,fragmentMonth)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit();
-            }
-        });
+        retrofit.obtenerBolsasByYear("bolsasYear/","4",textList,lineChartView);
     }
+
+
+
 }

@@ -6,20 +6,19 @@
     android:layout_height="match_parent"
     tools:context="com.example.getproducto.ListBolsas">
 
-   <com.google.android.material.tabs.TabLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       app:tabMode="fixed"
-       app:tabGravity="fill"
-       app:tabIndicatorColor="@color/colorAccent"
-       android:id="@+id/tabLayoutTendencia"
-       ></com.google.android.material.tabs.TabLayout>
-       <androidx.viewpager.widget.ViewPager
-           android:layout_width="match_parent"
-           android:layout_below="@+id/tabLayoutTendencia"
-           android:layout_height="match_parent"
-           android:id="@+id/viewPagerTendencia"
-           ></androidx.viewpager.widget.ViewPager>
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/colorAccent"
+        android:id="@+id/tabLayoutTendencia" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_below="@+id/tabLayoutTendencia"
+        android:layout_height="match_parent"
+        android:id="@+id/viewPagerTendencia" />
 
 
 </RelativeLayout>
