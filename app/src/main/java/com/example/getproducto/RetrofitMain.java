@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.getproducto.retrofit.Bolsa;
+import com.example.getproducto.retrofit.Categoria;
+import com.example.getproducto.retrofit.CategoriaDivided;
 import com.example.getproducto.retrofit.JsonPlaceHolderApi;
 import com.example.getproducto.retrofit.Probolsa;
 import com.example.getproducto.retrofit.Producto;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -43,6 +46,12 @@ public class RetrofitMain {
     private int papelCartonCount,pesoPapelCarton,puntosPapelCarton;
     private int metalCount,pesoMetal,puntosMetal;
     private int [] yAxisDataMonth= {0,0,0,0,0,0,0};
+    private int residuosTotal;
+    CategoriaDivided plasticoDivided = new CategoriaDivided();
+    CategoriaDivided vidrioDivided = new CategoriaDivided();
+    CategoriaDivided metalDivided = new CategoriaDivided();
+    CategoriaDivided papelDivided = new CategoriaDivided();
+    ArrayList<CategoriaDivided> categoriaDivideds = new ArrayList<CategoriaDivided>();
     private int [] yAxisDataYear= {0,0,0,0,0,0,0,0,0,0,0,0};
     LineChartView lineChartView;
     String[] axisDataMonth = {"Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"};
@@ -90,7 +99,8 @@ public class RetrofitMain {
         });
     }
 
-    public void obtenerDatosProductByBolsa(String usuarioID, ListaProductoByBolsaAdapter listProdBolsasAdapter,ListaProductoByBolsaAdapter.OnNoteListener prodbyBolsa){
+    public void obtenerDatosProductByBolsa(String usuarioID, ListaProductoByBolsaAdapter listProdBolsasAdapter,ListaProductoByBolsaAdapter.OnNoteListener prodbyBolsa,ArrayList<TextView> textViewsList){
+        initialCounter();
         JsonPlaceHolderApi jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
         Call<List<Probolsa>> call=jsonPlaceHolderApi.getProductoByIdBolsa("probolsa/bolsa/"+usuarioID);
         call.enqueue(new Callback<List<Probolsa>>() {
@@ -99,8 +109,74 @@ public class RetrofitMain {
                 if(response.isSuccessful()) {
 
                     List<Probolsa> probolsas = response.body();
-                    ArrayList<Probolsa> listaprodbolsas = (ArrayList) probolsas;
-                    listProdBolsasAdapter.adicionarListaCancion(listaprodbolsas,prodbyBolsa);
+                    if(probolsas.size()>0) {
+                        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                        Date recojo = probolsas.get(0).getBolsa().getRecojoFecha();
+                        String recojoFecha;
+                        if(recojo != null) {
+                             recojoFecha = formatter.format(recojo);
+                            textViewsList.get(1).setText("Recojo : "+recojoFecha);
+                        }
+                        else{
+                            textViewsList.get(1).setText("Recojo : Pendiente");
+                        }
+                        String creadoFecha = formatter.format(probolsas.get(0).getBolsa().getCreadoFecha());
+                        textViewsList.get(0).setText("Creada : "+creadoFecha);
+                    }
+                    for(int i=0;i<probolsas.size();i++)
+                    {
+                       if(probolsas.get(i).getProducto().getCategoria().getNombre().equals("Plastico")){
+                           plasticoCount+=probolsas.get(i).getCantidad();;
+                           puntosPlastico+=probolsas.get(i).getPuntuacion();
+                           pesoPlastico+=probolsas.get(i).getPeso();
+                       }else if (probolsas.get(i).getProducto().getCategoria().getNombre().equals("Vidrio"))
+                       {
+                            vidrioCount+=probolsas.get(i).getCantidad();;
+                           puntosVidrio+=probolsas.get(i).getPuntuacion();
+                           pesoVidrio+=probolsas.get(i).getPeso();
+                       }else if (probolsas.get(i).getProducto().getCategoria().getNombre().equals("Metal")){
+                            metalCount+=probolsas.get(i).getCantidad();;
+                           puntosMetal+=probolsas.get(i).getPuntuacion();
+                           pesoMetal+=probolsas.get(i).getPeso();
+                       }else{
+                            papelCartonCount+=probolsas.get(i).getCantidad();
+                           puntosPapelCarton+=probolsas.get(i).getPuntuacion();
+                           pesoPapelCarton+=probolsas.get(i).getPeso();
+                       }
+                    }
+                    if(plasticoCount != 0){
+                        plasticoDivided.setCantidad(plasticoCount);
+                        plasticoDivided.setPeso(pesoPlastico);
+                        plasticoDivided.setPuntos(puntosPlastico);
+                        plasticoDivided.setTipo("Plastico");
+                        categoriaDivideds.add(plasticoDivided);
+                    }
+                    if(vidrioCount != 0){
+                        vidrioDivided.setCantidad(vidrioCount);
+                        vidrioDivided.setPeso(pesoVidrio);
+                        vidrioDivided.setPuntos(puntosVidrio);
+                        vidrioDivided.setTipo("Vidrio");
+                        categoriaDivideds.add(vidrioDivided);
+                    }
+                    if(metalCount != 0){
+                        metalDivided.setCantidad(metalCount);
+                        metalDivided.setPeso(pesoMetal);
+                        metalDivided.setPuntos(puntosMetal);
+                        metalDivided.setTipo("Metal");
+                        categoriaDivideds.add(metalDivided);
+                    }
+                    if (papelCartonCount != 0){
+                        papelDivided.setCantidad(papelCartonCount);
+                        papelDivided.setPeso(pesoPapelCarton);
+                        papelDivided.setPuntos(puntosPapelCarton);
+                        papelDivided.setTipo("Papel/Carton");
+                        categoriaDivideds.add(papelDivided);
+                    }
+                    listProdBolsasAdapter.adicionarProductoBolsas(categoriaDivideds,prodbyBolsa);
+
+                    textViewsList.get(2).setText(Integer.toString(pesoPapelCarton+pesoMetal+pesoVidrio+pesoPlastico));
+                    textViewsList.get(3).setText(Integer.toString(puntosMetal+puntosPapelCarton+puntosVidrio+puntosPlastico));
+
                 }else{
                     Log.e(TAG,"onResponse:" + response.errorBody());
                 }
@@ -113,45 +189,11 @@ public class RetrofitMain {
         });
     }
 
-    public void obtenerDatosBolsas(String usuarioID, ListaBolsaAdapter listBolsasAdapter,ListaBolsaAdapter.OnNoteListener bolsaNoteListener){
-       /* JsonPlaceHolderApi jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
-        Call<List<Bolsa>> call=jsonPlaceHolderApi.getBolsasByUsuario("bolsa/usuario/"+usuarioID);
-        call.enqueue(new Callback<List<Bolsa>>() {
-            @Override
-            public void onResponse(Call<List<Bolsa>> call, Response<List<Bolsa>> response) {
-                if(response.isSuccessful()) {
 
-                    List<Bolsa> probolsas = response.body();
-                    ArrayList<Bolsa> listaprodbolsas = (ArrayList) probolsas;
-                    dataset=(ArrayList) listaprodbolsas;
-                    listBolsasAdapter.adicionarListaCancion(listaprodbolsas,bolsaNoteListener);
-                }else{
-                    Log.e(TAG,"onResponse:" + response.errorBody());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Bolsa>> call, Throwable t) {
-                Log.e(TAG,"onFailure:" + t.getMessage());
-            }
-        });
-        return dataset;*/
-    }
 
 
     public void obtenerBolsasByYear(String urlDate,String usuarioID,ArrayList<TextView> textViewsList,LineChartView lineChartView){
-        plasticoCount=0;
-        pesoPlastico=0;
-        puntosPlastico=0;
-        vidrioCount=0;
-        pesoVidrio=0;
-        puntosVidrio=0;
-        papelCartonCount=0;
-        pesoPapelCarton=0;
-        puntosPapelCarton=0;
-        metalCount=0;
-        pesoMetal=0;
-        puntosMetal=0;
+        initialCounter();
         JsonPlaceHolderApi jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
         Call<List<Probolsa>> call=jsonPlaceHolderApi.getBolsasByDate("probolsa/"+urlDate+usuarioID);
         call.enqueue(new Callback<List<Probolsa>>() {
@@ -193,11 +235,13 @@ public class RetrofitMain {
 
                             addingValuestoText(bolsasbydate,i,textViewsList);
                         }
+                        trendingData(textViewsList);
+
                     }
                     List yAxisValues = new ArrayList();
                     List axisValues = new ArrayList();
 
-                    Line line = new Line(yAxisValues).setColor(Color.parseColor("#9C27B0"));
+                    Line line = new Line(yAxisValues).setColor(Color.parseColor("#252525"));
                     for (int i = 0; i < axisDataYear.length; i++) {
                         axisValues.add(i, new AxisValue(i).setLabel(axisDataYear[i]));
                     }
@@ -245,18 +289,7 @@ public class RetrofitMain {
         });
     }
     public void obtenerBolsasByMonthorWeek(String urlDate,String usuarioID,ArrayList<TextView> textViewsList,LineChartView lineChartView){
-        plasticoCount=0;
-        pesoPlastico=0;
-        puntosPlastico=0;
-        vidrioCount=0;
-        pesoVidrio=0;
-        puntosVidrio=0;
-        papelCartonCount=0;
-        pesoPapelCarton=0;
-        puntosPapelCarton=0;
-        metalCount=0;
-        pesoMetal=0;
-        puntosMetal=0;
+        initialCounter();
         JsonPlaceHolderApi jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
         Call<List<Probolsa>> call=jsonPlaceHolderApi.getBolsasByDate("probolsa/"+urlDate+usuarioID);
         call.enqueue(new Callback<List<Probolsa>>() {
@@ -292,12 +325,13 @@ public class RetrofitMain {
 
                                 addingValuestoText(bolsasbydate,i,textViewsList);
                             }
+                            trendingData(textViewsList);
 
                         }
                     }
                     List yAxisValues = new ArrayList();
                     List axisValues = new ArrayList();
-                    Line line = new Line(yAxisValues).setColor(Color.parseColor("#9C27B0"));
+                    Line line = new Line(yAxisValues).setColor(Color.parseColor("#252525"));
                     for (int i = 0; i < axisDataMonth.length; i++) {
                         axisValues.add(i, new AxisValue(i).setLabel(axisDataMonth[i]));
                     }
@@ -357,28 +391,50 @@ public class RetrofitMain {
         } else if (bolsasbydate.get(i).getProducto().getCategoria().getNombre().equals("Vidrio")) {
             pesoVidrio += bolsasbydate.get(i).getProducto().getPeso();
             puntosVidrio += bolsasbydate.get(i).getPuntuacion();
-            plasticoCount++;
-            textViewsList.get(1).setText(Integer.toString(plasticoCount));
+            vidrioCount++;
+            textViewsList.get(1).setText(Integer.toString(vidrioCount));
             textViewsList.get(5).setText(Integer.toString(pesoVidrio)+ "  g");
             textViewsList.get(9).setText(Integer.toString(puntosVidrio)+ "  ptos");
         } else if (bolsasbydate.get(i).getProducto().getCategoria().getNombre().equals("Papel/Carton")) {
             pesoPapelCarton += bolsasbydate.get(i).getProducto().getPeso();
             puntosPapelCarton += bolsasbydate.get(i).getPuntuacion();
-            plasticoCount++;
-            textViewsList.get(2).setText(Integer.toString(plasticoCount));
+            papelCartonCount++;
+            textViewsList.get(2).setText(Integer.toString(papelCartonCount));
             textViewsList.get(6).setText(Integer.toString(pesoPapelCarton)+ "  g");
             textViewsList.get(10).setText(Integer.toString(puntosPapelCarton)+ "  ptos");
         } else if (bolsasbydate.get(i).getProducto().getCategoria().getNombre().equals("Metal")) {
             pesoMetal += bolsasbydate.get(i).getProducto().getPeso();
             puntosMetal += bolsasbydate.get(i).getPuntuacion();
-            plasticoCount++;
-            textViewsList.get(3).setText(Integer.toString(plasticoCount));
+            metalCount++;
+            textViewsList.get(3).setText(Integer.toString(metalCount));
             textViewsList.get(7).setText(Integer.toString(pesoMetal)+ "  g");
             textViewsList.get(11).setText(Integer.toString(puntosMetal)+ "  ptos");
         }
     }
 
+    public void initialCounter()
+    {
+        plasticoCount=0;
+        pesoPlastico=0;
+        puntosPlastico=0;
+        vidrioCount=0;
+        pesoVidrio=0;
+        puntosVidrio=0;
+        papelCartonCount=0;
+        pesoPapelCarton=0;
+        puntosPapelCarton=0;
+        metalCount=0;
+        pesoMetal=0;
+        puntosMetal=0;
+        residuosTotal=0;
+    }
 
+
+    public void trendingData(ArrayList<TextView> textViewsList){
+        textViewsList.get(12).setText(Integer.toString(plasticoCount+vidrioCount+metalCount+papelCartonCount));
+        textViewsList.get(13).setText(Integer.toString((pesoPapelCarton+pesoVidrio+pesoPlastico+pesoMetal)/1000));
+        textViewsList.get(14).setText(Integer.toString(puntosMetal+puntosPlastico+puntosVidrio+puntosPapelCarton));
+    }
 
 
 

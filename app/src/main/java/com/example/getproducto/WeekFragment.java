@@ -32,7 +32,7 @@ public class WeekFragment extends Fragment {
     TextView txtPlasticoCount,txtPlasticoPuntos,txtPlasticoPeso;
     TextView txtVidrioCount,txtVidrioPuntos,txtVidrioPeso;
     TextView txtMetalesCount,txtMetalesPuntos,txtMetalesPeso;
-    TextView txtPapelCartonCount,txtPapelCartonPuntos,txtPapelCartonPeso,txtTest;
+    TextView txtPapelCartonCount,txtPapelCartonPuntos,txtPapelCartonPeso,txtResiduosCount,txtPesoResiduos,txtPuntajeResiduos;
     LineChartView lineChartView;
     @Nullable
     @Override
@@ -58,6 +58,9 @@ public class WeekFragment extends Fragment {
         txtPapelCartonPuntos =getView().findViewById(R.id.txtPapelCartonPuntos) ;
         txtPapelCartonPeso =getView().findViewById(R.id.txtPapelCartonPeso) ;
         lineChartView = getView().findViewById(R.id.chart);
+        txtResiduosCount = getView().findViewById(R.id.txtCantBolsasHoy);
+        txtPesoResiduos = getView().findViewById(R.id.txtPesoBolsasHoy);
+        txtPuntajeResiduos = getView().findViewById(R.id.txtPtosBolsasHoy);
         textList.add(txtPlasticoCount);
         textList.add(txtVidrioCount);
         textList.add(txtPapelCartonCount);
@@ -70,36 +73,12 @@ public class WeekFragment extends Fragment {
         textList.add(txtVidrioPuntos);
         textList.add(txtPapelCartonPuntos);
         textList.add(txtMetalesPuntos);
+        textList.add(txtResiduosCount);
+        textList.add(txtPesoResiduos);
+        textList.add(txtPuntajeResiduos);
 
 
         retrofit.obtenerBolsasByMonthorWeek("bolsasWeek/","4",textList,lineChartView);
 
-
-       /* getView().findViewById(R.id.btnMonth).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                MonthFragment fragmentMonth = new MonthFragment();
-                manager.beginTransaction()
-                        .setCustomAnimations(R.anim.enter_right_left,R.anim.exit_right_left,
-                                R.anim.enter_left_right,R.anim.exit_left_right).replace(R.id.frameDate,fragmentMonth)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit();
-            }
-        });
-
-        getView().findViewById(R.id.btnYear).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                YearFragment yearFragment = new YearFragment();
-                manager.beginTransaction()
-                        .setCustomAnimations(R.anim.enter_right_left,R.anim.exit_right_left,
-                                R.anim.enter_left_right,R.anim.exit_left_right)
-                        .replace(R.id.frameDate,yearFragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit();
-            }
-        });*/
     }
 }

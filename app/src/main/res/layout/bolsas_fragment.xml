@@ -127,7 +127,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/relativeTendenciasHoy"
-            android:text="Mis Bolsas:"
+            android:text="Ultimas bolsas:"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="20dp"
             android:id="@+id/txtMisBolsas"
@@ -139,7 +139,7 @@
         android:layout_below="@+id/txtMisBolsas"
         android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="400dp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         />

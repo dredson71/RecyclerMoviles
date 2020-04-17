@@ -68,7 +68,7 @@ public class BolsasUserFragment extends Fragment  implements ListaBolsaAdapter.O
 
     private void obtenerDatos(String usuarioID){
         JsonPlaceHolderApi jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
-        Call<List<Bolsa>> call=jsonPlaceHolderApi.getBolsasByUsuario("bolsa/usuario/"+usuarioID);
+        Call<List<Bolsa>> call=jsonPlaceHolderApi.getBolsasByUsuario("bolsa/last/"+usuarioID);
         call.enqueue(new Callback<List<Bolsa>>() {
             @Override
             public void onResponse(Call<List<Bolsa>> call, Response<List<Bolsa>> response) {
@@ -106,12 +106,12 @@ public class BolsasUserFragment extends Fragment  implements ListaBolsaAdapter.O
                     for(int i=0;i<probolsas.size();i++)
                     {
                         bolsas.add(probolsas.get(i).getBolsa().getCodigo());
-                        pesoCount+=probolsas.get(i).getProducto().getPeso();
+                        pesoCount+=probolsas.get(i).getPeso();
                         puntosCount+=probolsas.get(i).getPuntuacion();
                     }
                     textViewsList.get(0).setText(Integer.toString(bolsas.size()));
                     textViewsList.get(2).setText(Integer.toString(puntosCount));
-                    textViewsList.get(1).setText(Integer.toString(pesoCount));
+                    textViewsList.get(1).setText(Integer.toString(pesoCount/1000));
 
                 }else{
                     Log.e(TAG,"onResponse:" + response.errorBody());

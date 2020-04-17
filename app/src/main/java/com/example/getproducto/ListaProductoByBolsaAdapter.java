@@ -4,17 +4,19 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.getproducto.retrofit.CategoriaDivided;
 import com.example.getproducto.retrofit.Probolsa;
 
 import java.util.ArrayList;
 
 public class ListaProductoByBolsaAdapter extends RecyclerView.Adapter<ListaProductoByBolsaAdapter.ViewHolder> {
 
-    private ArrayList<Probolsa> dataset;
+    private ArrayList<CategoriaDivided> dataset;
     private Context context;
     private OnNoteListener canonNoteListener;
 
@@ -34,10 +36,25 @@ public class ListaProductoByBolsaAdapter extends RecyclerView.Adapter<ListaProdu
     @Override
     public void onBindViewHolder(ViewHolder holder,int position){
 
-        Probolsa c = dataset.get(position);
-        holder.txt_Producto.setText(c.getProducto().getNombre());
-        holder.txt_Contenido.setText(Double.toString(c.getProducto().getContenido()));
-        holder.txt_Abreviatura.setText(c.getProducto().getTipo_Contenido().getAbreviatura());
+        CategoriaDivided c = dataset.get(position);
+        holder.txt_Contador.setText(Integer.toString(c.getCantidad()));
+        holder.txt_PesoContrador.setText(Integer.toString(c.getPeso()));
+        holder.txt_PuntosContador.setText(Integer.toString(c.getPuntos()));
+        int [] imagenes = {R.drawable.plastico,R.drawable.vidrio,R.drawable.metal,R.drawable.carton};
+        if(c.getTipo().equals("Plastico"))
+        {
+            holder.img_ImageTipo.setImageResource(imagenes[0]);
+        }else if(c.getTipo().equals("Vidrio"))
+        {
+            holder.img_ImageTipo.setImageResource(imagenes[1]);
+        }else if(c.getTipo().equals("Metal"))
+        {
+            holder.img_ImageTipo.setImageResource(imagenes[2]);
+        }else{
+            holder.img_ImageTipo.setImageResource(imagenes[3]);
+        }
+
+
 
     }
 
@@ -47,24 +64,26 @@ public class ListaProductoByBolsaAdapter extends RecyclerView.Adapter<ListaProdu
     }
 
 
-    public void adicionarListaCancion(ArrayList<Probolsa> listaCancion,OnNoteListener canonNoteListener){
-        dataset.addAll(listaCancion);
+    public void adicionarProductoBolsas(ArrayList<CategoriaDivided> listaProductos, OnNoteListener canonNoteListener){
+        dataset.addAll(listaProductos);
         notifyDataSetChanged();
         this.canonNoteListener=canonNoteListener;
     }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView txt_Producto;
-        private TextView txt_Contenido;
-        private TextView txt_Abreviatura;
+        private TextView txt_Contador;
+        private TextView txt_PesoContrador;
+        private TextView txt_PuntosContador;
+        private ImageView img_ImageTipo;
         OnNoteListener onNoteListener;
 
         public ViewHolder(View itemView ,OnNoteListener onNoteListener ){
             super(itemView);
-            txt_Producto=(TextView) itemView.findViewById(R.id.txrProducto_Nombre);
-            txt_Contenido=(TextView) itemView.findViewById(R.id.txtCantidadProductoLista);
-            txt_Abreviatura=(TextView) itemView.findViewById(R.id.txtAbreviaturaProductoLista);
+            txt_Contador=(TextView) itemView.findViewById(R.id.txtCountProductsPlastic);
+            txt_PesoContrador=(TextView) itemView.findViewById(R.id.txtPesoProductsPlastic);
+            txt_PuntosContador=(TextView) itemView.findViewById(R.id.txtCantidadMetalCount);
+            img_ImageTipo = itemView.findViewById(R.id.imagePlastic);
             this.onNoteListener=onNoteListener;
 
             itemView.setOnClickListener(this);

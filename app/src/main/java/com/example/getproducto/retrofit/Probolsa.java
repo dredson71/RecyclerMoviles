@@ -6,6 +6,15 @@ public class Probolsa {
     private double peso;
     private Producto producto;
     private Bolsa bolsa;
+    private int cantidad;
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
 
     public int getCodigo() {
         return codigo;

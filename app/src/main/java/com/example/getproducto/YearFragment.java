@@ -27,7 +27,7 @@ public class YearFragment extends Fragment {
     TextView txtPlasticoCount,txtPlasticoPuntos,txtPlasticoPeso;
     TextView txtVidrioCount,txtVidrioPuntos,txtVidrioPeso;
     TextView txtMetalesCount,txtMetalesPuntos,txtMetalesPeso;
-    TextView txtPapelCartonCount,txtPapelCartonPuntos,txtPapelCartonPeso;
+    TextView txtPapelCartonCount,txtPapelCartonPuntos,txtPapelCartonPeso,txtResiduosCount,txtPesoResiduos,txtPuntajeResiduos;
     LineChartView lineChartView;
     String[] axisData = {"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept",
             "Oct", "Nov", "Dec"};
@@ -56,6 +56,9 @@ public class YearFragment extends Fragment {
         txtPapelCartonPuntos =view.findViewById(R.id.txtPapelCartonPuntos) ;
         txtPapelCartonPeso =view.findViewById(R.id.txtPapelCartonPeso) ;
         lineChartView = view.findViewById(R.id.chart);
+        txtResiduosCount = getView().findViewById(R.id.txtCantBolsasHoy);
+        txtPesoResiduos = getView().findViewById(R.id.txtPesoBolsasHoy);
+        txtPuntajeResiduos = getView().findViewById(R.id.txtPtosBolsasHoy);
         textList.add(txtPlasticoCount);
         textList.add(txtVidrioCount);
         textList.add(txtPapelCartonCount);
@@ -68,6 +71,9 @@ public class YearFragment extends Fragment {
         textList.add(txtVidrioPuntos);
         textList.add(txtPapelCartonPuntos);
         textList.add(txtMetalesPuntos);
+        textList.add(txtResiduosCount);
+        textList.add(txtPesoResiduos);
+        textList.add(txtPuntajeResiduos);
         retrofit.obtenerBolsasByYear("bolsasYear/","4",textList,lineChartView);
     }
 

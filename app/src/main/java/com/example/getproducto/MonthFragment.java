@@ -23,7 +23,7 @@ public class MonthFragment extends Fragment {
     TextView txtPlasticoCount,txtPlasticoPuntos,txtPlasticoPeso;
     TextView txtVidrioCount,txtVidrioPuntos,txtVidrioPeso;
     TextView txtMetalesCount,txtMetalesPuntos,txtMetalesPeso;
-    TextView txtPapelCartonCount,txtPapelCartonPuntos,txtPapelCartonPeso,txtTest;
+    TextView txtPapelCartonCount,txtPapelCartonPuntos,txtPapelCartonPeso,txtResiduosCount,txtPesoResiduos,txtPuntajeResiduos;
     LineChartView lineChartView;
     @Nullable
     @Override
@@ -46,6 +46,9 @@ public class MonthFragment extends Fragment {
         txtPapelCartonCount =getView().findViewById(R.id.txtPapelCartonCantidad) ;
         txtPapelCartonPuntos =getView().findViewById(R.id.txtPapelCartonPuntos) ;
         txtPapelCartonPeso =getView().findViewById(R.id.txtPapelCartonPeso) ;
+        txtResiduosCount = getView().findViewById(R.id.txtCantBolsasHoy);
+        txtPesoResiduos = getView().findViewById(R.id.txtPesoBolsasHoy);
+        txtPuntajeResiduos = getView().findViewById(R.id.txtPtosBolsasHoy);
         textList.add(txtPlasticoCount);
         textList.add(txtVidrioCount);
         textList.add(txtPapelCartonCount);
@@ -58,6 +61,9 @@ public class MonthFragment extends Fragment {
         textList.add(txtVidrioPuntos);
         textList.add(txtPapelCartonPuntos);
         textList.add(txtMetalesPuntos);
+        textList.add(txtResiduosCount);
+        textList.add(txtPesoResiduos);
+        textList.add(txtPuntajeResiduos);
         lineChartView = getView().findViewById(R.id.chart);
        retrofit.obtenerBolsasByMonthorWeek("bolsasMonth/","4",textList,lineChartView);
 
