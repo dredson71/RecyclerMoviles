@@ -65,7 +65,8 @@ public class MonthFragment extends Fragment {
         textList.add(txtPesoResiduos);
         textList.add(txtPuntajeResiduos);
         lineChartView = getView().findViewById(R.id.chart);
-       retrofit.obtenerBolsasByMonthorWeek("bolsasMonth/","4",textList,lineChartView);
+        String usuarioID = ((InitialValues)this.getActivity().getApplication()).getIdUsuario();
+        retrofit.obtenerBolsasByMonthorWeek("bolsasMonth/",usuarioID,textList,lineChartView);
 
     }
 }

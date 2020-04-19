@@ -60,8 +60,9 @@ public class BolsasUserFragment extends Fragment  implements ListaBolsaAdapter.O
                 .baseUrl("https://recyclerapiresttdp.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        obtenerDatos("4");
-        obtenerBolsasByDay("bolsasDay/","4",textList);
+        String usuarioID = ((InitialValues)this.getActivity().getApplication()).getIdUsuario();
+        obtenerDatos(usuarioID);
+        obtenerBolsasByDay("bolsasDay/",usuarioID,textList);
         return view;
 
     }

@@ -76,9 +76,10 @@ public class WeekFragment extends Fragment {
         textList.add(txtResiduosCount);
         textList.add(txtPesoResiduos);
         textList.add(txtPuntajeResiduos);
+        String usuarioID = ((InitialValues)this.getActivity().getApplication()).getIdUsuario();
 
 
-        retrofit.obtenerBolsasByMonthorWeek("bolsasWeek/","4",textList,lineChartView);
+        retrofit.obtenerBolsasByMonthorWeek("bolsasWeek/",usuarioID,textList,lineChartView);
 
     }
 }

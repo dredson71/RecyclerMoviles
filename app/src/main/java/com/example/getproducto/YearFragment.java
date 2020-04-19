@@ -74,7 +74,8 @@ public class YearFragment extends Fragment {
         textList.add(txtResiduosCount);
         textList.add(txtPesoResiduos);
         textList.add(txtPuntajeResiduos);
-        retrofit.obtenerBolsasByYear("bolsasYear/","4",textList,lineChartView);
+        String usuarioID = ((InitialValues)this.getActivity().getApplication()).getIdUsuario();
+        retrofit.obtenerBolsasByYear("bolsasYear/",usuarioID,textList,lineChartView);
     }
 
 
